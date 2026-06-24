@@ -1,0 +1,40 @@
+.pr-queue__count {
+  display: inline;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.pr-queue__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pr-queue__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.pr-queue__empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--bg-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+
+.pr-queue__empty p {
+  font-size: 13.5px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" fill="none">
+  <path d="M180 420 C180 420, 180 180, 220 80 C250 10, 300 10, 310 80 C325 170, 320 280, 320 420" fill="rgba(80,220,120,0.7)" stroke="rgba(80,220,120,0.8)" stroke-width="6"/>
+  <path d="M250 65 C280 5, 340 30, 325 130 C310 230, 305 340, 305 420" fill="rgba(255,255,255,0.5)" stroke="rgba(255,255,255,0.35)" stroke-width="44"/>
+  <text x="105" y="448" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="158" fill="rgba(80,220,120,0.6)" letter-spacing="10">BRD</text>
+</svg>

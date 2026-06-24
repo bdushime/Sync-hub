@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" fill="none">
+  <!-- Green arch (left stroke going up and curving right) -->
+  <path d="M140 400 C140 400, 140 150, 190 60 C215 10, 240 0, 260 20 C290 50, 300 100, 295 160"
+        fill="none" stroke="rgba(120,210,80,0.85)" stroke-width="45" stroke-linecap="round"/>
+
+  <!-- White inner curve (the swoosh going from top-right down) -->
+  <path d="M240 15 C300 -10, 340 50, 320 140 C300 240, 285 320, 280 400"
+        fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="40" stroke-linecap="round"/>
+
+  <!-- BRD text - bold and prominent -->
+  <text x="65" y="410" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="145" fill="rgba(120,210,80,0.85)" letter-spacing="12">BRD</text>
+</svg>

@@ -1,0 +1,300 @@
+.dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--page-padding);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Hero Section */
+.dashboard__hero {
+  padding: 64px 48px;
+  border-radius: 18px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+}
+
+.dashboard__hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  width: 360px;
+  height: 360px;
+  transform: translateY(-50%);
+  background: url('/brd-logo.png') no-repeat center center;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dashboard__hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(27, 94, 54, 0.92) 0%,
+    rgba(27, 94, 54, 0.7) 40%,
+    rgba(27, 94, 54, 0.1) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dashboard__hero--junior,
+.dashboard__hero--senior,
+.dashboard__hero--devops,
+.dashboard__hero--scrum {
+  background: #1B5E36;
+  color: white;
+  box-shadow: 0 6px 24px rgba(4, 65, 34, 0.3);
+}
+
+.dashboard__hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.dashboard__greeting {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+
+.dashboard__name {
+  opacity: 0.9;
+}
+
+.dashboard__subtitle {
+  font-size: 14.5px;
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+.dashboard__subtitle strong {
+  font-weight: 700;
+  opacity: 1;
+}
+
+.dashboard__hero-stats {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.dashboard__stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  min-width: 120px;
+}
+
+.dashboard__stat-card div {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard__stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.dashboard__stat-label {
+  font-size: 11.5px;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+/* Grid Layouts */
+.dashboard__grid {
+  display: grid;
+  gap: 24px;
+}
+
+.dashboard__grid--junior,
+.dashboard__grid--senior {
+  grid-template-columns: 1.4fr 1fr;
+}
+
+.dashboard__grid--devops {
+  grid-template-columns: 1fr;
+}
+
+.dashboard__grid--scrum {
+  grid-template-columns: 2fr 1fr;
+}
+
+.dashboard__col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* Env status bar for devops */
+.dashboard__env-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dashboard__env-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.dashboard__env-status span:first-child {
+  font-size: 18px;
+}
+
+.dashboard__env-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.dashboard__env-value {
+  color: var(--status-available);
+  margin-left: auto;
+}
+
+/* Bottleneck Alert */
+.dashboard__alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--status-urgent-bg);
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.dashboard__alert-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--status-urgent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.dashboard__alert-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--status-urgent);
+}
+
+.dashboard__alert-detail {
+  font-size: 12.5px;
+  color: #b91c1c;
+  font-weight: 400;
+}
+
+/* Section Title */
+.dashboard__section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+/* Velocity Stats (Scrum) */
+.dashboard__velocity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.dashboard__velocity-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+}
+
+.dashboard__velocity-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+.dashboard__velocity-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dashboard__velocity-value {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.dashboard__velocity-value--green { color: var(--brd-green); }
+.dashboard__velocity-value--amber { color: var(--text-primary); }
+.dashboard__velocity-value--red { color: var(--status-urgent); }
+.dashboard__velocity-value--blue { color: var(--text-primary); }
+
+.dashboard__velocity-change {
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.dashboard__velocity-change--up { color: var(--brd-green); }
+.dashboard__velocity-change--down { color: var(--status-urgent); }
+
+@media (max-width: 1024px) {
+  .dashboard__grid--junior,
+  .dashboard__grid--senior,
+  .dashboard__grid--scrum {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard__hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard__hero-stats {
+    width: 100%;
+  }
+
+  .dashboard__velocity-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

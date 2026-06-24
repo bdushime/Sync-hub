@@ -1,0 +1,59 @@
+:root {
+  /* BRD Brand Colors */
+  --brd-green: #008c44;
+  --brd-green-hover: #007339;
+  --brd-green-light: #e6f5ed;
+  --brd-green-glow: rgba(0, 140, 68, 0.12);
+
+  --brd-yellow: #fdb913;
+  --brd-yellow-hover: #e5a711;
+  --brd-yellow-light: #fff8e6;
+
+  /* Neutrals */
+  --bg-main: #e8c872;
+  --bg-card: #fef8e8;
+  --bg-card-hover: #fdf3d9;
+  --bg-sidebar: #1a1f36;
+  --bg-nav: transparent;
+
+  --text-primary: #1e293b;
+  --text-secondary: #4a5568;
+  --text-tertiary: #6b7a8d;
+  --text-inverse: #ffffff;
+
+  /* Status Colors */
+  --status-available: #10b981;
+  --status-available-bg: #ecfdf5;
+  --status-busy: #f59e0b;
+  --status-busy-bg: #fffbeb;
+  --status-urgent: #ef4444;
+  --status-urgent-bg: #fef2f2;
+  --status-info: #3b82f6;
+  --status-info-bg: #eff6ff;
+
+  /* Borders & Shadows */
+  --border-light: #ddb85e;
+  --border-medium: #c9a44e;
+  --shadow-sm: 0 1px 3px rgba(80, 50, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(80, 50, 0, 0.1);
+  --shadow-lg: 0 8px 30px rgba(80, 50, 0, 0.12);
+  --shadow-card: 0 2px 10px rgba(80, 50, 0, 0.08), 0 0 1px rgba(80, 50, 0, 0.12);
+  --shadow-card-hover: 0 8px 24px rgba(80, 50, 0, 0.12);
+
+  /* Spacing */
+  --nav-height: 64px;
+  --sidebar-width: 72px;
+  --page-padding: 28px;
+  --card-padding: 24px;
+  --card-radius: 14px;
+  --btn-radius: 10px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-smooth: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}

@@ -1,0 +1,119 @@
+.radar.card {
+  background: #05381e;
+  border-color: #064a28;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.radar.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/brd-logo-watermark.svg') no-repeat bottom right;
+  background-size: 260px auto;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.radar .card__header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.radar .card__header h3 {
+  color: white;
+}
+
+.radar__live-dot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6ee7a0;
+}
+
+.radar__pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6ee7a0;
+}
+
+.radar__feed {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 280px;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.radar__entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: background var(--transition-fast);
+}
+
+.radar__entry:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.radar__icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #6ee7a0;
+}
+
+.radar__details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.radar__message {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.3;
+}
+
+.radar__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radar__env-tag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0;
+}
+
+.radar__env-tag.radar__env--staging {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.radar__env-tag.radar__env--prod {
+  color: #6ee7a0;
+}
+
+.radar__time {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,63 @@
+.reviewer-status__count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brd-green);
+}
+
+.reviewer-status__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reviewer-status__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 12px;
+  transition: all var(--transition-fast);
+}
+
+.reviewer-status__item:hover {
+  background: var(--bg-main);
+}
+
+.reviewer-status__person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reviewer-status__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewer-status__name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.reviewer-status__role {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.reviewer-status__badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.reviewer-status__badge--available {
+  color: var(--brd-green);
+}
+
+.reviewer-status__badge--busy {
+  color: #92400e;
+}
