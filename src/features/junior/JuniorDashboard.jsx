@@ -1,5 +1,5 @@
 import { useRole } from '../../context/RoleContext';
-import { MOCK_PRS } from '../../data/mockData';
+import { usePRs } from '../../context/PRContext';
 import PRSubmissionForm from './PRSubmissionForm';
 import PRQueueList from '../../components/pr/PRQueueList';
 import ReviewerStatusList from '../../components/widgets/ReviewerStatusList';
@@ -10,7 +10,8 @@ import '../../styles/DashboardLayout.css';
 
 export default function JuniorDashboard() {
   const { currentUser, activeTab } = useRole();
-  const myPRs = MOCK_PRS.filter(pr => pr.author.id === currentUser?.id);
+  const { prs } = usePRs();
+  const myPRs = prs.filter(pr => pr.author.id === currentUser?.id);
   const pendingPRs = myPRs.filter(pr =>
     pr.status === 'pending_review' || pr.status === 'in_review'
   );

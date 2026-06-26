@@ -1,22 +1,33 @@
 import { useState } from 'react';
+import { useRole } from '../../context/RoleContext';
+import { usePRs } from '../../context/PRContext';
 import Card, { CardHeader } from '../../components/shared/Card';
 import Button from '../../components/shared/Button';
-import { GitPullRequest, Link, Send } from 'lucide-react';
+import { GitPullRequest, Link } from 'lucide-react';
 import './PRSubmissionForm.css';
 
-export default function PRSubmissionForm({ onSubmit }) {
+export default function PRSubmissionForm() {
+  const { currentUser } = useRole();
+  const { seniors, addPR } = usePRs();
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+  const [reviewerId, setReviewerId] = useState('');
   const [submitted, setSubmitted] = useState(false);
+
+  const availableSeniors = seniors.filter(s =>
+    s.status === 'available' && s.id !== currentUser?.id
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim() || !url.trim()) return;
-    onSubmit?.({ title, url });
+    if (!title.trim() || !url.trim() || !reviewerId) return;
+    const reviewer = seniors.find(s => s.id === reviewerId);
+    addPR(title.trim(), url.trim(), currentUser, reviewer);
     setSubmitted(true);
     setTimeout(() => {
       setTitle('');
       setUrl('');
+      setReviewerId('');
       setSubmitted(false);
     }, 2000);
   };
@@ -59,12 +70,28 @@ export default function PRSubmissionForm({ onSubmit }) {
           </div>
         </div>
 
+        <div className="pr-form__field">
+          <label className="pr-form__label">Assign Reviewer</label>
+          <select
+            className="pr-form__input pr-form__select"
+            value={reviewerId}
+            onChange={(e) => setReviewerId(e.target.value)}
+          >
+            <option value="">Select a reviewer...</option>
+            {availableSeniors.map(s => (
+              <option key={s.id} value={s.id}>{s.name}</option>
+            ))}
+            {availableSeniors.length === 0 && (
+              <option disabled>No reviewers available</option>
+            )}
+          </select>
+        </div>
+
         <Button
           variant="secondary"
           size="lg"
-          icon={<Send size={16} />}
           type="submit"
-          disabled={!title.trim() || !url.trim()}
+          disabled={!title.trim() || !url.trim() || !reviewerId}
           className="pr-form__submit"
         >
           {submitted ? 'Submitted!' : 'Submit for Review'}

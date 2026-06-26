@@ -1,32 +1,40 @@
 export const ROLES = {
   JUNIOR: 'junior',
   SENIOR: 'senior',
+  QA: 'qa',
   DEVOPS: 'devops',
   SCRUM: 'scrum',
+  MANAGER: 'manager',
 };
 
 export const ROLE_LABELS = {
   [ROLES.JUNIOR]: 'Junior Developer',
   [ROLES.SENIOR]: 'Senior Developer',
+  [ROLES.QA]: 'QA Engineer',
   [ROLES.DEVOPS]: 'DevOps Engineer',
   [ROLES.SCRUM]: 'Scrum Master',
+  [ROLES.MANAGER]: 'DI Manager',
 };
 
 export const ROLE_DESCRIPTIONS = {
   [ROLES.JUNIOR]: 'Submit PRs, track reviews, and monitor your pipeline',
-  [ROLES.SENIOR]: 'Review code, manage your availability, and approve merges',
+  [ROLES.SENIOR]: 'Submit & review code, manage availability, approve merges',
+  [ROLES.QA]: 'Test staging deployments, approve or reject for production',
   [ROLES.DEVOPS]: 'Deploy to staging & production, manage release pipeline',
   [ROLES.SCRUM]: 'Monitor team velocity, identify bottlenecks, schedule reviews',
+  [ROLES.MANAGER]: 'Department velocity, resource health, and environment stability',
 };
 
 export const USERS = {
-  junior1: { id: 'junior1', name: 'Alex Chen', avatar: 'AC', role: ROLES.JUNIOR },
-  junior2: { id: 'junior2', name: 'Priya Sharma', avatar: 'PS', role: ROLES.JUNIOR },
-  senior1: { id: 'senior1', name: 'Marcus Johnson', avatar: 'MJ', role: ROLES.SENIOR, status: 'available' },
-  senior2: { id: 'senior2', name: 'Sarah Kim', avatar: 'SK', role: ROLES.SENIOR, status: 'busy' },
-  senior3: { id: 'senior3', name: 'David Okafor', avatar: 'DO', role: ROLES.SENIOR, status: 'available' },
-  devops1: { id: 'devops1', name: 'Jordan Rivera', avatar: 'JR', role: ROLES.DEVOPS },
-  scrum1: { id: 'scrum1', name: 'Emily Watson', avatar: 'EW', role: ROLES.SCRUM },
+  junior1: { id: 'junior1', name: 'Dushime', avatar: 'AC', role: ROLES.JUNIOR },
+  junior2: { id: 'junior2', name: 'Beni', avatar: 'PS', role: ROLES.JUNIOR },
+  senior1: { id: 'senior1', name: 'Victor', avatar: 'MJ', role: ROLES.SENIOR, status: 'available' },
+  senior2: { id: 'senior2', name: 'Eric', avatar: 'SK', role: ROLES.SENIOR, status: 'busy' },
+  senior3: { id: 'senior3', name: 'Janvier', avatar: 'DO', role: ROLES.SENIOR, status: 'available' },
+  qa1: { id: 'qa1', name: 'Clarisse', avatar: 'LN', role: ROLES.QA },
+  devops1: { id: 'devops1', name: 'Malaika', avatar: 'JR', role: ROLES.DEVOPS },
+  scrum1: { id: 'scrum1', name: 'Thierry', avatar: 'EW', role: ROLES.SCRUM },
+  manager1: { id: 'manager1', name: 'Michel', avatar: 'PH', role: ROLES.MANAGER },
 };
 
 export const PR_STATUSES = {
@@ -34,7 +42,9 @@ export const PR_STATUSES = {
   IN_REVIEW: 'in_review',
   APPROVED: 'approved',
   MERGED: 'merged',
-  STAGING: 'staging',
+  STAGING_AWAITING_QA: 'staging_awaiting_qa',
+  STAGING_QA_APPROVED: 'staging_qa_approved',
+  STAGING_QA_REJECTED: 'staging_qa_rejected',
   PRODUCTION: 'production',
 };
 
@@ -43,7 +53,9 @@ export const PR_STATUS_LABELS = {
   [PR_STATUSES.IN_REVIEW]: 'In Review',
   [PR_STATUSES.APPROVED]: 'Approved',
   [PR_STATUSES.MERGED]: 'Merged',
-  [PR_STATUSES.STAGING]: 'Staging',
+  [PR_STATUSES.STAGING_AWAITING_QA]: 'Awaiting QA',
+  [PR_STATUSES.STAGING_QA_APPROVED]: 'QA Approved',
+  [PR_STATUSES.STAGING_QA_REJECTED]: 'QA Rejected',
   [PR_STATUSES.PRODUCTION]: 'Production',
 };
 
@@ -56,10 +68,6 @@ export const MOCK_PRS = [
     reviewer: USERS.senior1,
     status: PR_STATUSES.PENDING_REVIEW,
     createdAt: new Date(Date.now() - 5 * 60 * 60 * 1000),
-    labels: ['bug', 'auth'],
-    linesAdded: 47,
-    linesRemoved: 12,
-    filesChanged: 3,
   },
   {
     id: 'pr-2',
@@ -69,23 +77,15 @@ export const MOCK_PRS = [
     reviewer: USERS.senior2,
     status: PR_STATUSES.IN_REVIEW,
     createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
-    labels: ['feature', 'ui'],
-    linesAdded: 156,
-    linesRemoved: 23,
-    filesChanged: 5,
   },
   {
     id: 'pr-3',
     title: 'Refactor database connection pooling',
     url: 'https://github.com/brd/platform/pull/336',
-    author: USERS.junior1,
+    author: USERS.senior1,
     reviewer: USERS.senior3,
     status: PR_STATUSES.APPROVED,
     createdAt: new Date(Date.now() - 8 * 60 * 60 * 1000),
-    labels: ['refactor', 'backend'],
-    linesAdded: 89,
-    linesRemoved: 67,
-    filesChanged: 4,
   },
   {
     id: 'pr-4',
@@ -95,10 +95,6 @@ export const MOCK_PRS = [
     reviewer: USERS.senior1,
     status: PR_STATUSES.MERGED,
     createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
-    labels: ['security', 'api'],
-    linesAdded: 34,
-    linesRemoved: 8,
-    filesChanged: 2,
   },
   {
     id: 'pr-5',
@@ -106,12 +102,8 @@ export const MOCK_PRS = [
     url: 'https://github.com/brd/platform/pull/330',
     author: USERS.junior1,
     reviewer: USERS.senior2,
-    status: PR_STATUSES.STAGING,
+    status: PR_STATUSES.STAGING_AWAITING_QA,
     createdAt: new Date(Date.now() - 48 * 60 * 60 * 1000),
-    labels: ['feature', 'real-time'],
-    linesAdded: 245,
-    linesRemoved: 0,
-    filesChanged: 8,
   },
   {
     id: 'pr-6',
@@ -121,23 +113,42 @@ export const MOCK_PRS = [
     reviewer: USERS.senior3,
     status: PR_STATUSES.PRODUCTION,
     createdAt: new Date(Date.now() - 72 * 60 * 60 * 1000),
-    labels: ['bug', 'ui'],
-    linesAdded: 18,
-    linesRemoved: 22,
-    filesChanged: 2,
   },
   {
     id: 'pr-7',
     title: 'Add unit tests for payment processing module',
     url: 'https://github.com/brd/platform/pull/345',
-    author: USERS.junior1,
-    reviewer: null,
+    author: USERS.senior1,
+    reviewer: USERS.senior2,
     status: PR_STATUSES.PENDING_REVIEW,
     createdAt: new Date(Date.now() - 1 * 60 * 60 * 1000),
-    labels: ['testing'],
-    linesAdded: 312,
-    linesRemoved: 0,
-    filesChanged: 6,
+  },
+  {
+    id: 'pr-8',
+    title: 'Add email verification on signup flow',
+    url: 'https://github.com/brd/platform/pull/348',
+    author: USERS.junior1,
+    reviewer: USERS.senior1,
+    status: PR_STATUSES.STAGING_AWAITING_QA,
+    createdAt: new Date(Date.now() - 36 * 60 * 60 * 1000),
+  },
+  {
+    id: 'pr-9',
+    title: 'Optimize image compression pipeline',
+    url: 'https://github.com/brd/platform/pull/350',
+    author: USERS.senior3,
+    reviewer: USERS.senior1,
+    status: PR_STATUSES.STAGING_QA_APPROVED,
+    createdAt: new Date(Date.now() - 50 * 60 * 60 * 1000),
+  },
+  {
+    id: 'pr-10',
+    title: 'Fix race condition in checkout flow',
+    url: 'https://github.com/brd/platform/pull/352',
+    author: USERS.junior2,
+    reviewer: USERS.senior3,
+    status: PR_STATUSES.STAGING_QA_REJECTED,
+    createdAt: new Date(Date.now() - 40 * 60 * 60 * 1000),
   },
 ];
 
@@ -166,7 +177,6 @@ export function getTimeAgo(date) {
   const minutes = Math.floor(diff / 60000);
   const hours = Math.floor(diff / 3600000);
   const days = Math.floor(diff / 86400000);
-
   if (minutes < 1) return 'just now';
   if (minutes < 60) return `${minutes}m ago`;
   if (hours < 24) return `${hours}h ago`;

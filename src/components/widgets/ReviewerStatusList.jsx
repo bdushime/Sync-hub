@@ -1,12 +1,12 @@
-import { USERS } from '../../data/mockData';
+import { usePRs } from '../../context/PRContext';
 import Avatar from '../shared/Avatar';
 import Card, { CardHeader } from '../shared/Card';
 import { Circle } from 'lucide-react';
 import './ReviewerStatusList.css';
 
-const seniors = Object.values(USERS).filter(u => u.role === 'senior');
-
 export default function ReviewerStatusList() {
+  const { seniors } = usePRs();
+
   return (
     <Card className="reviewer-status">
       <CardHeader>

@@ -1,28 +1,63 @@
 import { useRole } from '../../context/RoleContext';
-import { MOCK_PRS } from '../../data/mockData';
+import { usePRs } from '../../context/PRContext';
+import { PR_STATUSES } from '../../data/mockData';
 import AvailabilityToggle from './AvailabilityToggle';
+import PRSubmissionForm from '../junior/PRSubmissionForm';
 import PRQueueList from '../../components/pr/PRQueueList';
 import ReleaseRadarFeed from '../../components/widgets/ReleaseRadarFeed';
 import ScrumCalendar from '../scrum/ScrumCalendar';
-import Card, { CardHeader } from '../../components/shared/Card';
-import { Eye, TrendingUp, CheckCircle } from 'lucide-react';
+import { Eye, TrendingUp, CheckCircle, Code2 } from 'lucide-react';
 import '../../styles/DashboardLayout.css';
 
 export default function SeniorDashboard() {
-  const { activeTab } = useRole();
+  const { currentUser, activeTab } = useRole();
+  const { prs, updatePRStatus, addNotification } = usePRs();
 
-  const reviewQueue = MOCK_PRS
-    .filter(pr => pr.status === 'pending_review' || pr.status === 'in_review')
+  const myPRs = prs.filter(pr => pr.author.id === currentUser?.id);
+  const myPendingPRs = myPRs.filter(pr =>
+    pr.status === PR_STATUSES.PENDING_REVIEW || pr.status === PR_STATUSES.IN_REVIEW
+  );
+
+  const reviewQueue = prs
+    .filter(pr =>
+      (pr.status === PR_STATUSES.PENDING_REVIEW || pr.status === PR_STATUSES.IN_REVIEW) &&
+      pr.author.id !== currentUser?.id
+    )
     .sort((a, b) => a.createdAt - b.createdAt);
 
-  const approvedCount = MOCK_PRS.filter(pr => pr.status === 'approved' || pr.status === 'merged').length;
+  const approvedCount = prs.filter(pr =>
+    pr.status === PR_STATUSES.APPROVED || pr.status === PR_STATUSES.MERGED
+  ).length;
+
+  const handleApprove = (pr) => {
+    updatePRStatus(pr.id, PR_STATUSES.MERGED);
+    addNotification(`"${pr.title}" approved & merged — ready for DevOps`, 'success');
+  };
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'queue':
+      case 'mycode':
         return (
           <div className="dashboard__grid dashboard__grid--senior">
             <div className="dashboard__col dashboard__col--main">
+              <PRSubmissionForm />
+              <PRQueueList
+                title="My Pending PRs"
+                icon={Code2}
+                prs={myPendingPRs}
+                emptyMessage="All your PRs have been reviewed!"
+              />
+            </div>
+            <div className="dashboard__col dashboard__col--side">
+              <ReleaseRadarFeed />
+            </div>
+          </div>
+        );
+      case 'reviews':
+        return (
+          <div className="dashboard__grid dashboard__grid--senior">
+            <div className="dashboard__col dashboard__col--main">
+              <AvailabilityToggle />
               <PRQueueList
                 title="Review Queue"
                 icon={Eye}
@@ -31,34 +66,9 @@ export default function SeniorDashboard() {
                 actions={(pr) => [{
                   label: 'Approve & Merge',
                   variant: 'primary',
-                  onClick: () => {},
+                  onClick: () => handleApprove(pr),
                 }]}
               />
-            </div>
-            <div className="dashboard__col dashboard__col--side">
-              <AvailabilityToggle />
-            </div>
-          </div>
-        );
-      case 'analytics':
-        return (
-          <div className="dashboard__grid dashboard__grid--senior">
-            <div className="dashboard__col dashboard__col--main">
-              <Card>
-                <CardHeader>
-                  <h3><TrendingUp size={16} style={{ display: 'inline', marginRight: 8, verticalAlign: '-2px' }} />Review Analytics</h3>
-                </CardHeader>
-                <div className="dashboard__velocity-grid" style={{ marginBottom: 0 }}>
-                  <div className="dashboard__velocity-card">
-                    <span className="dashboard__velocity-label">Reviews Done</span>
-                    <span className="dashboard__velocity-value dashboard__velocity-value--green">{approvedCount}</span>
-                  </div>
-                  <div className="dashboard__velocity-card">
-                    <span className="dashboard__velocity-label">In Queue</span>
-                    <span className="dashboard__velocity-value">{reviewQueue.length}</span>
-                  </div>
-                </div>
-              </Card>
             </div>
             <div className="dashboard__col dashboard__col--side">
               <ScrumCalendar readOnly />
@@ -78,13 +88,19 @@ export default function SeniorDashboard() {
                 actions={(pr) => [{
                   label: 'Approve & Merge',
                   variant: 'primary',
-                  onClick: () => {},
+                  onClick: () => handleApprove(pr),
                 }]}
+              />
+              <PRQueueList
+                title="My Pending PRs"
+                icon={Code2}
+                prs={myPendingPRs}
+                emptyMessage="All your PRs have been reviewed!"
               />
             </div>
             <div className="dashboard__col dashboard__col--side">
+              <PRSubmissionForm />
               <ReleaseRadarFeed />
-              <ScrumCalendar readOnly />
             </div>
           </div>
         );
@@ -97,7 +113,7 @@ export default function SeniorDashboard() {
         <div className="dashboard__hero-content">
           <h1 className="dashboard__greeting">Review Hub</h1>
           <p className="dashboard__subtitle">
-            <strong>{reviewQueue.length} PRs</strong> awaiting your review
+            <strong>{reviewQueue.length} PRs</strong> to review, <strong>{myPendingPRs.length}</strong> of yours pending
           </p>
         </div>
         <div className="dashboard__hero-stats">
@@ -105,7 +121,7 @@ export default function SeniorDashboard() {
             <Eye size={18} />
             <div>
               <span className="dashboard__stat-value">{reviewQueue.length}</span>
-              <span className="dashboard__stat-label">In Queue</span>
+              <span className="dashboard__stat-label">To Review</span>
             </div>
           </div>
           <div className="dashboard__stat-card">

@@ -1,6 +1,6 @@
 import { useRole } from '../../context/RoleContext';
 import { ROLES, ROLE_LABELS, ROLE_DESCRIPTIONS } from '../../data/mockData';
-import { Code2, Shield, Rocket, Users, GitPullRequest, ArrowRight } from 'lucide-react';
+import { Code2, Shield, Rocket, Users, GitPullRequest, ArrowRight, ShieldCheck, BarChart3 } from 'lucide-react';
 import './RoleSelect.css';
 
 const ROLE_CONFIG = [
@@ -17,6 +17,12 @@ const ROLE_CONFIG = [
     gradient: 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)',
   },
   {
+    role: ROLES.QA,
+    icon: ShieldCheck,
+    color: '#0891b2',
+    gradient: 'linear-gradient(135deg, #ecfeff 0%, #cffafe 100%)',
+  },
+  {
     role: ROLES.DEVOPS,
     icon: Rocket,
     color: '#059669',
@@ -27,6 +33,12 @@ const ROLE_CONFIG = [
     icon: Users,
     color: '#d97706',
     gradient: 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)',
+  },
+  {
+    role: ROLES.MANAGER,
+    icon: BarChart3,
+    color: '#1B5E36',
+    gradient: 'linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)',
   },
 ];
 
@@ -71,7 +83,7 @@ export default function RoleSelect() {
           ))}
         </div>
 
-        <p className="role-select__footer">Demo Mode — No authentication required</p>
+        {/* <p className="role-select__footer">Demo Mode — No authentication required</p> */}
       </div>
     </div>
   );

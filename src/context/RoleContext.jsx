@@ -6,8 +6,10 @@ const RoleContext = createContext(null);
 const ROLE_USER_MAP = {
   [ROLES.JUNIOR]: USERS.junior1,
   [ROLES.SENIOR]: USERS.senior1,
+  [ROLES.QA]: USERS.qa1,
   [ROLES.DEVOPS]: USERS.devops1,
   [ROLES.SCRUM]: USERS.scrum1,
+  [ROLES.MANAGER]: USERS.manager1,
 };
 
 export function RoleProvider({ children }) {

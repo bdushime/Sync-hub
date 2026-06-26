@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useRole } from '../../context/RoleContext';
+import { usePRs } from '../../context/PRContext';
 import './AvailabilityToggle.css';
 
 export default function AvailabilityToggle() {
-  const [available, setAvailable] = useState(true);
+  const { currentUser } = useRole();
+  const { seniors, toggleSeniorAvailability } = usePRs();
+
+  const me = seniors.find(s => s.id === currentUser?.id);
+  const available = me?.status === 'available';
 
   return (
     <div className={`availability-toggle ${available ? 'availability-toggle--available' : 'availability-toggle--busy'}`}>
@@ -14,12 +19,12 @@ export default function AvailabilityToggle() {
           </span>
         </div>
         <p className="availability-toggle__hint">
-          {available ? 'Juniors can ping you for reviews' : 'Focus mode — pings are paused'}
+          {available ? 'Juniors can see you as available' : 'Focus mode — hidden from reviewer list'}
         </p>
       </div>
       <button
         className="availability-toggle__switch"
-        onClick={() => setAvailable(!available)}
+        onClick={() => toggleSeniorAvailability(currentUser.id)}
         role="switch"
         aria-checked={available}
       >

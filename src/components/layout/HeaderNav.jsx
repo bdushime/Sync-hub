@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRole } from '../../context/RoleContext';
 import { ROLES, ROLE_LABELS } from '../../data/mockData';
 import Avatar from '../shared/Avatar';
-import { GitPullRequest, Bell, LogOut, ChevronDown, LayoutDashboard, Code2, Rocket, BarChart3, Settings } from 'lucide-react';
+import { GitPullRequest, Bell, LogOut, ChevronDown, LayoutDashboard, Code2, Rocket, BarChart3, Settings, ShieldCheck } from 'lucide-react';
 import './HeaderNav.css';
 
 const NAV_ITEMS = {
@@ -13,8 +13,12 @@ const NAV_ITEMS = {
   ],
   [ROLES.SENIOR]: [
     { label: 'Dashboard', icon: LayoutDashboard, id: 'dashboard' },
-    { label: 'Review Queue', icon: GitPullRequest, id: 'queue' },
-    { label: 'Analytics', icon: BarChart3, id: 'analytics' },
+    { label: 'My Code', icon: Code2, id: 'mycode' },
+    { label: 'Reviews', icon: GitPullRequest, id: 'reviews' },
+  ],
+  [ROLES.QA]: [
+    { label: 'Dashboard', icon: LayoutDashboard, id: 'dashboard' },
+    { label: 'Staging Queue', icon: ShieldCheck, id: 'staging' },
   ],
   [ROLES.DEVOPS]: [
     { label: 'Dashboard', icon: LayoutDashboard, id: 'dashboard' },
@@ -25,6 +29,11 @@ const NAV_ITEMS = {
     { label: 'Dashboard', icon: LayoutDashboard, id: 'dashboard' },
     { label: 'Pipeline', icon: GitPullRequest, id: 'pipeline' },
     { label: 'Reports', icon: BarChart3, id: 'reports' },
+  ],
+  [ROLES.MANAGER]: [
+    { label: 'Dashboard', icon: LayoutDashboard, id: 'dashboard' },
+    { label: 'Analytics', icon: BarChart3, id: 'analytics' },
+    { label: 'Resources', icon: Code2, id: 'resources' },
   ],
 };
 

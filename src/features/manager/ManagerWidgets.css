@@ -1,0 +1,183 @@
+/* Mock Chart */
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.chart-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chart-legend__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.chart-legend__dot--opened { background: var(--brd-green); opacity: 0.4; }
+.chart-legend__dot--merged { background: var(--brd-green); }
+
+.mock-chart {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 24px 10px 8px;
+  min-height: 180px;
+}
+
+.mock-chart__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.mock-chart__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.mock-chart__bar {
+  width: 28px;
+  border-radius: 4px 4px 1px 1px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 8px;
+  transition: height 0.4s ease;
+}
+
+.mock-chart__bar--opened {
+  background: var(--brd-green);
+  opacity: 0.3;
+}
+
+.mock-chart__bar--merged {
+  background: var(--brd-green);
+}
+
+.mock-chart__val {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-primary);
+  transform: translateY(-16px);
+}
+
+.mock-chart__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Stage Analytics Table */
+.stage-table {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stage-table__row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stage-table__info {
+  min-width: 130px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-table__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stage-table__count {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.stage-table__bar-wrap {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-main);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stage-table__bar {
+  height: 100%;
+  background: var(--brd-green);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.stage-table__pct {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 36px;
+  text-align: right;
+}
+
+/* Discipline Bandwidth */
+.bandwidth-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bandwidth-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.bandwidth-item:last-child {
+  border-bottom: none;
+}
+
+.bandwidth-item__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bandwidth-item__name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.bandwidth-item__count {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.bandwidth-item__label {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+.bandwidth--heavy {
+  color: var(--status-urgent);
+}
+
+.bandwidth--moderate {
+  color: #92400e;
+}
+
+.bandwidth--light {
+  color: var(--brd-green);
+}

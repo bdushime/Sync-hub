@@ -1,10 +1,11 @@
-import { RELEASE_LOG, getTimeAgo } from '../../data/mockData';
+import { usePRs } from '../../context/PRContext';
+import { getTimeAgo } from '../../data/mockData';
 import Card, { CardHeader } from '../shared/Card';
 import { Rocket, ArrowUpCircle, RotateCcw } from 'lucide-react';
 import './ReleaseRadarFeed.css';
 
 const getIcon = (message) => {
-  if (message.includes('Rollback')) return <RotateCcw size={14} />;
+  if (message.includes('Rolled back') || message.includes('rejected')) return <RotateCcw size={14} />;
   if (message.includes('Production')) return <ArrowUpCircle size={14} />;
   return <Rocket size={14} />;
 };
@@ -15,6 +16,8 @@ const getEnvClass = (env) => {
 };
 
 export default function ReleaseRadarFeed() {
+  const { releaseLog } = usePRs();
+
   return (
     <Card className="radar">
       <CardHeader>
@@ -26,22 +29,26 @@ export default function ReleaseRadarFeed() {
       </CardHeader>
 
       <div className="radar__feed">
-        {RELEASE_LOG.map((entry) => (
-          <div key={entry.id} className="radar__entry">
-            <div className={`radar__icon ${getEnvClass(entry.env)}`}>
-              {getIcon(entry.message)}
-            </div>
-            <div className="radar__details">
-              <span className="radar__message">{entry.message}</span>
-              <div className="radar__meta">
-                <span className={`radar__env-tag ${getEnvClass(entry.env)}`}>
-                  {entry.env}
-                </span>
-                <span className="radar__time">{getTimeAgo(entry.timestamp)}</span>
+        {releaseLog.length === 0 ? (
+          <p style={{ textAlign: 'center', padding: 24, opacity: 0.5, fontSize: 13 }}>No releases yet</p>
+        ) : (
+          releaseLog.map((entry) => (
+            <div key={entry.id} className="radar__entry">
+              <div className={`radar__icon ${getEnvClass(entry.env)}`}>
+                {getIcon(entry.message)}
+              </div>
+              <div className="radar__details">
+                <span className="radar__message">{entry.message}</span>
+                <div className="radar__meta">
+                  <span className={`radar__env-tag ${getEnvClass(entry.env)}`}>
+                    {entry.env}
+                  </span>
+                  <span className="radar__time">{getTimeAgo(entry.timestamp)}</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </Card>
   );
